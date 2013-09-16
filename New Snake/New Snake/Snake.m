@@ -25,6 +25,8 @@
         tail = [[NSMutableArray array] retain];
         [tail addObject:[NSValue valueWithCGPoint:CGPointMake(head_.x-10, head_.y)]];
         [tail addObject:[NSValue valueWithCGPoint:CGPointMake(head_.x-10, head_.y-10)]];
+        [tail addObject:[NSValue valueWithCGPoint:CGPointMake(head_.x-10, head_.y-20)]];
+        [tail addObject:[NSValue valueWithCGPoint:CGPointMake(head_.x-10, head_.y-30)]];
     }
     return self;
 }
@@ -41,6 +43,8 @@
 
 -(BOOL) move:(int) direction {
     
+    BOOL collide = NO;
+    
     if ( ((direction == up) && (dir_ == down)) ||
          ((direction == down) && (dir_ == up)) ||
          ((direction == left) && (dir_ == right)) ||
@@ -48,32 +52,40 @@
         direction = dir_;
     }
     
-    for (int i=[tail count]-1; i>0; i--) {
-        CGPoint tailPrev = [[tail objectAtIndex:i-1] CGPointValue];
-        [tail setObject:[NSValue valueWithCGPoint:tailPrev] atIndexedSubscript:i];
-    }
-    [tail setObject:[NSValue valueWithCGPoint:head_] atIndexedSubscript:0];
+    CGPoint nextHead;
     
     switch (direction) {
         case left:
-            head_ = ccp(head_.x-10, head_.y);
+            nextHead = ccp(head_.x-10, head_.y);
             break;
         case right:
-            head_ = ccp(head_.x+10, head_.y);
+            nextHead = ccp(head_.x+10, head_.y);
             break;
         case up:
-            head_ = ccp(head_.x, head_.y+10);
+            nextHead = ccp(head_.x, head_.y+10);
             break;
         case down:
-            head_ = ccp(head_.x, head_.y-10);
+            nextHead = ccp(head_.x, head_.y-10);
             break;
         default:
             break;
     }
     
+    for (int i=[tail count]-1; i>0; i--) {
+        CGPoint tailPrev = [[tail objectAtIndex:i-1] CGPointValue];
+        [tail setObject:[NSValue valueWithCGPoint:tailPrev] atIndexedSubscript:i];
+        if (CGPointEqualToPoint(tailPrev, nextHead)) {
+            NSLog(@"Se ha chocado!!");
+            collide = YES;
+        }
+    }
+    [tail setObject:[NSValue valueWithCGPoint:head_] atIndexedSubscript:0];
+    
+    head_ = nextHead;
+    
     dir_ = direction;
     
-    return YES;
+    return !collide;
 }
 
 // on "dealloc" you need to release all your retained objects

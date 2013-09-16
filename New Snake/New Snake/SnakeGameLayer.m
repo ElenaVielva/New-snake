@@ -56,14 +56,18 @@
         player = [Snake node];
         [self addChild:player];
         
-//        snake = [CCLabelTTF labelWithString:@"o" fontName:@"Helvetica" fontSize:10];
-//        snake.position = ccp(size.width*0.5, size.height*0.5);
-//        [self addChild:snake];
+        
+        endLabel = [CCLabelTTF labelWithString:@"End! Ooooh!" fontName:@"American Typewriter" fontSize:20];
+        endLabel.color = ccWHITE;
+        endLabel.visible = NO;
+        endLabel.position = ccp(size.width*0.5, size.height*0.5);
+        [self addChild:endLabel];
+        
         
         prevAccX = 0;
         prevAccY = 0;
         
-        self.isAccelerometerEnabled = YES;
+        [self setAccelerometerEnabled:YES];
         
 	}
 	return self;
@@ -93,7 +97,11 @@
     prevAccX = currAccX;
     prevAccY = currAccY;
     
-    [player move:direction];
+    if (![player move:direction]) {
+        [self unschedule:@selector(move)];
+        endLabel.visible = YES;
+        [self setAccelerometerEnabled:NO];
+    };
 //    CGPoint pos = player.head;
 //    switch (direction) {
 //        case left:

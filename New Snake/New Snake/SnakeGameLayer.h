@@ -13,7 +13,7 @@
 @interface SnakeGameLayer : CCLayer {
     int level;
 
-//    CCLabelTTF *snake;
+    CCLabelTTF *endLabel;
     
     float prevAccX;
     float prevAccY;

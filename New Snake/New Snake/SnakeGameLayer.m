@@ -12,6 +12,8 @@
 #import "Constants.h"
 #import "MenuLayer.h"
 
+#import "CCGL.h"
+
 @implementation SnakeGameLayer
 
 // Helper class method that creates a Scene with the HelloWorldLayer as the only child.
@@ -29,6 +31,13 @@
 	return scene;
 }
 
+-(void) draw {
+    
+    CGPoint posFood = info.posFood;
+    ccDrawSolidRect(ccp(posFood.x-5, posFood.y-5), ccp(posFood.x+5, posFood.y+5), ccc4f(0.92, 0.55, 0.55, 1));
+
+}
+
 // on "init" you need to initialize your instance
 -(id) init {
 	// always call "super" init
@@ -44,6 +53,7 @@
         player = [Snake node];
         [self addChild:player];
         
+        info = [[[GameInfo alloc] initWithLevel:level] retain];
         
         endLabel = [CCLabelTTF labelWithString:@"Game Over" fontName:@"American Typewriter" fontSize:30];
         endLabel.color = ccc3(141, 141, 235);
@@ -69,11 +79,8 @@
 }
 
 - (void) onEnterTransitionDidFinish {
-    
     labelCountDown.visible = YES;
-    
     [self schedule:@selector(countDownMethod) interval:1 repeat:2 delay:1];
-    
 }
 
 - (void) countDownMethod {
@@ -102,21 +109,11 @@
 
     refAccX = currAccX;
     refAccY = currAccY;
-    refAccZ = currAccZ;
-    
-    
-    
-    
 }
 
 - (void) accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration {
-    
-//    NSLog(@"Acceleration: %f %f %f", acceleration.x, acceleration.y, acceleration.z);
-
     currAccX = acceleration.x;
     currAccY = acceleration.y;
-    currAccZ = acceleration.z;
-    
 }
 
 - (void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -129,26 +126,28 @@
     
     float difX = currAccX-refAccX;
     float difY = currAccY-refAccY;
-    float difZ = currAccZ-refAccZ;
-    NSLog(@"Diferencias son %f %f %f (x, y, z)", difX,difY,difZ);
-    if (currAccX-refAccX<-0.2) {
+    
+    int direction;
+    if (difX<-0.2) {
         direction = up;
-    } else if (currAccX-refAccX>0.2) {
+    } else if (difX>0.2) {
         direction = down;
-    } else if (currAccY-refAccY>0.1) {
+    } else if (difY>0.1) {
         direction = right;
-    } else if (currAccY-refAccY<-0.1) {
+    } else if (difY<-0.1) {
         direction = left;
+    } else {
+        direction = same;
     }
     
-//    refAccX = currAccX;
-//    refAccY = currAccY;
-    
+    // End of the game (collision)
     if (![player move:direction]) {
         [self unschedule:@selector(move)];
         endLabel.visible = YES;
-        [self setAccelerometerEnabled:NO];
     };
+    if ([player eat:info.posFood]) {
+        [info eatFood];
+    }
 
 }
 
@@ -158,6 +157,8 @@
 	// in this particular example nothing needs to be released.
 	// cocos2d will automatically release all the children (Label)
     NSLog(@"Deallocating %@",self);
+    
+    [info release];
 	
 	// don't forget to call "super dealloc"
 	[super dealloc];

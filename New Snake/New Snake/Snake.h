@@ -14,11 +14,15 @@
     CGPoint head_;
     NSMutableArray *tail;
     
+    CGPoint ultPos;
 }
 
 @property (nonatomic) int dir;
 @property (nonatomic) CGPoint head;
 
 -(BOOL) move:(int)direction;
+-(BOOL) isOnSnake:(CGPoint)pos;
+
+-(BOOL) eat:(CGPoint) foodPos;
 
 @end

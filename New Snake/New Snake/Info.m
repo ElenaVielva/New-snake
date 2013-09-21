@@ -7,12 +7,15 @@
 //
 
 #import "Info.h"
+#import "cocos2d.h"
+#import "Snake.h"
 
 static Info *shared;
 
 @implementation Info
 
 @synthesize level = _level;
+@synthesize score = _score;
 
 +(Info*) sharedInfo {
     if (shared) {
@@ -27,9 +30,9 @@ static Info *shared;
     if (self) {
         _level = 0;
         _score = 0;
-                
     }
     return self;
 }
+
 
 @end

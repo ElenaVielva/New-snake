@@ -15,6 +15,7 @@
 
 
 @property (nonatomic) int level;
+@property (nonatomic) int score;
 
 +(Info*) sharedInfo;
 

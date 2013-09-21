@@ -9,26 +9,24 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "Snake.h"
+#import "GameInfo.h"
 
 @interface SnakeGameLayer : CCLayer <UIAccelerometerDelegate> {
     int level;
 
+    int countDown;
+    CCLabelTTF *labelCountDown;
     CCLabelTTF *endLabel;
     
     float refAccX;
     float refAccY;
-    float refAccZ;
     
     float currAccX;
     float currAccY;
-    float currAccZ;
-    
-    int direction;
     
     Snake *player;
+    GameInfo *info;
     
-    int countDown;
-    CCLabelTTF *labelCountDown;
 }
 
 // returns a CCScene that contains the HelloWorldLayer as the only child

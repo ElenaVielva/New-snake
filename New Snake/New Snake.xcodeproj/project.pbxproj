@@ -146,6 +146,7 @@
 		F3C777EC17E7023A00E402D2 /* ChangeLevelLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C777EB17E7023A00E402D2 /* ChangeLevelLayer.m */; };
 		F3C777EF17E7100E00E402D2 /* Info.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C777EE17E7100E00E402D2 /* Info.m */; };
 		F3C777F217E7144700E402D2 /* SnakeGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C777F117E7144700E402D2 /* SnakeGameLayer.m */; };
+		F3F78A2717EE0D2B003B8D2B /* GameInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F78A2617EE0D2B003B8D2B /* GameInfo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -440,6 +441,8 @@
 		F3C777EE17E7100E00E402D2 /* Info.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Info.m; sourceTree = "<group>"; };
 		F3C777F017E7144700E402D2 /* SnakeGameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnakeGameLayer.h; sourceTree = "<group>"; };
 		F3C777F117E7144700E402D2 /* SnakeGameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnakeGameLayer.m; sourceTree = "<group>"; };
+		F3F78A2517EE0D2B003B8D2B /* GameInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInfo.h; sourceTree = "<group>"; };
+		F3F78A2617EE0D2B003B8D2B /* GameInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameInfo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -512,6 +515,8 @@
 				F3C777F117E7144700E402D2 /* SnakeGameLayer.m */,
 				F3C0F21617E7784E00A72D9D /* Snake.h */,
 				F3C0F21717E7784E00A72D9D /* Snake.m */,
+				F3F78A2517EE0D2B003B8D2B /* GameInfo.h */,
+				F3F78A2617EE0D2B003B8D2B /* GameInfo.m */,
 				F3C777ED17E7100E00E402D2 /* Info.h */,
 				F3C777EE17E7100E00E402D2 /* Info.m */,
 				F36759D017E5D87C0059A895 /* IntroLayer.h */,
@@ -1094,6 +1099,7 @@
 				F3C777F217E7144700E402D2 /* SnakeGameLayer.m in Sources */,
 				F327EFC717E76014003C7825 /* Constants.m in Sources */,
 				F3C0F21817E7784E00A72D9D /* Snake.m in Sources */,
+				F3F78A2717EE0D2B003B8D2B /* GameInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,7 +21,8 @@ typedef enum {
     left,
     right,
     up,
-    down
+    down,
+    same
 }directions;
 
 @end

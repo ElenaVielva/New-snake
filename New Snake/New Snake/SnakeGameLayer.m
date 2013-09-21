@@ -10,6 +10,7 @@
 
 #import "Info.h"
 #import "Constants.h"
+#import "MenuLayer.h"
 
 @implementation SnakeGameLayer
 
@@ -39,86 +40,116 @@
 		CGSize size = [[CCDirector sharedDirector] winSize];
 
         
-        switch (level) {
-            case easy:
-                [self schedule:@selector(move) interval:0.8f];
-                break;
-            case medium:
-                [self schedule:@selector(move) interval:0.4f];
-                break;
-            case hard:
-                [self schedule:@selector(move) interval:0.2f];
-                break;
-            default:
-                break;
-        }
-		
+        		
         player = [Snake node];
         [self addChild:player];
         
         
-        endLabel = [CCLabelTTF labelWithString:@"End! Ooooh!" fontName:@"American Typewriter" fontSize:20];
-        endLabel.color = ccWHITE;
-        endLabel.visible = NO;
+        endLabel = [CCLabelTTF labelWithString:@"Game Over" fontName:@"American Typewriter" fontSize:30];
+        endLabel.color = ccc3(141, 141, 235);
         endLabel.position = ccp(size.width*0.5, size.height*0.5);
-        [self addChild:endLabel];
+        [self addChild:endLabel z:5];
+        endLabel.visible = NO;
         
         
-        prevAccX = 0;
-        prevAccY = 0;
+        countDown = 2;
+        labelCountDown = [CCLabelTTF labelWithString:@"3" fontName:@"American Typewriter" fontSize:60];
+        labelCountDown.color = ccc3(141, 141, 235);
+        labelCountDown.position = ccp(size.width*0.5, size.height*0.5);
+        [self addChild:labelCountDown z:5];
+        labelCountDown.visible = NO;
         
-        [self setAccelerometerEnabled:YES];
+        [[UIAccelerometer sharedAccelerometer] setUpdateInterval:1.0 / 60];
+        [[UIAccelerometer sharedAccelerometer] setDelegate:self];
+        
+        [self setTouchEnabled:YES];
         
 	}
 	return self;
 }
 
-- (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration {
+- (void) onEnterTransitionDidFinish {
     
-    NSLog(@"Acceleration: %f %f", acceleration.x, acceleration.y);
+    labelCountDown.visible = YES;
+    
+    [self schedule:@selector(countDownMethod) interval:1 repeat:2 delay:1];
+    
+}
+
+- (void) countDownMethod {
+    
+    NSLog(@"CountDownMethod, counter is %d",countDown);
+    if (countDown>0) {
+        [labelCountDown setString:[NSString stringWithFormat:@"%d",countDown]];
+        countDown--;
+        return;
+    }
+    labelCountDown.visible = NO;
+    
+    switch (level) {
+        case easy:
+            [self schedule:@selector(move) interval:.8f];
+            break;
+        case medium:
+            [self schedule:@selector(move) interval:.4f];
+            break;
+        case hard:
+            [self schedule:@selector(move) interval:.2f];
+            break;
+        default:
+            break;
+    }
+
+    refAccX = currAccX;
+    refAccY = currAccY;
+    refAccZ = currAccZ;
+    
+    
+    
+    
+}
+
+- (void) accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration {
+    
+//    NSLog(@"Acceleration: %f %f %f", acceleration.x, acceleration.y, acceleration.z);
 
     currAccX = acceleration.x;
     currAccY = acceleration.y;
+    currAccZ = acceleration.z;
     
+}
+
+- (void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (endLabel.visible) {
+        [[CCDirector sharedDirector] replaceScene:[MenuLayer scene]];
+    }
 }
 
 - (void) move {
     
-    if (currAccX-prevAccX<-0.3) {
+    float difX = currAccX-refAccX;
+    float difY = currAccY-refAccY;
+    float difZ = currAccZ-refAccZ;
+    NSLog(@"Diferencias son %f %f %f (x, y, z)", difX,difY,difZ);
+    if (currAccX-refAccX<-0.2) {
         direction = up;
-    } else if (currAccX-prevAccX>0.3) {
+    } else if (currAccX-refAccX>0.2) {
         direction = down;
-    } else if (currAccY-prevAccY>0.1) {
+    } else if (currAccY-refAccY>0.1) {
         direction = right;
-    } else if (currAccY-prevAccY<-0.1) {
+    } else if (currAccY-refAccY<-0.1) {
         direction = left;
     }
     
-    prevAccX = currAccX;
-    prevAccY = currAccY;
+//    refAccX = currAccX;
+//    refAccY = currAccY;
     
     if (![player move:direction]) {
         [self unschedule:@selector(move)];
         endLabel.visible = YES;
         [self setAccelerometerEnabled:NO];
     };
-//    CGPoint pos = player.head;
-//    switch (direction) {
-//        case left:
-//            player.head = ccp(pos.x-10, pos.y);
-//            break;
-//        case right:
-//            player.head = ccp(pos.x+10, pos.y);
-//            break;
-//        case up:
-//            player.head = ccp(pos.x, pos.y+10);
-//            break;
-//        case down:
-//            player.head = ccp(pos.x, pos.y-10);
-//            break;
-//        default:
-//            break;
-//    }
+
 }
 
 // on "dealloc" you need to release all your retained objects

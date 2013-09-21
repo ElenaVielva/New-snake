@@ -63,13 +63,13 @@
         NSString *nameLevel;
         switch ([Info sharedInfo].level) {
             case 0:
-                nameLevel = @"Level: Easy";
+                nameLevel = @"Easy";
                 break;
             case 1:
-                nameLevel = @"Level: Medium";
+                nameLevel = @"Medium";
                 break;
             case 2:
-                nameLevel = @"Level: Hard";
+                nameLevel = @"Hard";
                 break;
             default:
                 break;

@@ -24,7 +24,7 @@
 }
 
 -(void) eatFood {
-    _gameScore+=_level;
+    _gameScore+=_level+1;
     NSLog(@"Score: %d",_gameScore);
     
     CGPoint tempPos;

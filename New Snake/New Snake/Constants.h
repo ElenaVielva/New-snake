@@ -9,6 +9,11 @@
 #import <Foundation/Foundation.h>
 #define NUMLEVELS   3
 
+#define limLeft     0.05
+#define limRight    0.95
+#define limUp       0.92
+#define limDown     0.05
+
 @interface Constants : NSObject
 
 typedef enum {
@@ -18,11 +23,12 @@ typedef enum {
 }levelDifficulties;
 
 typedef enum {
-    left,
-    right,
-    up,
-    down,
-    same
+    left,  //0
+    right, //1
+    up,    //2
+    down,  //3
+    same   //4
 }directions;
+
 
 @end

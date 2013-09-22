@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F327EFC717E76014003C7825 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = F327EFC617E76014003C7825 /* Constants.m */; };
+		F361072A17EF051200331E22 /* ScenarioLimits.m in Sources */ = {isa = PBXBuildFile; fileRef = F361072917EF051100331E22 /* ScenarioLimits.m */; };
 		F367582617E5D87A0059A895 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F367582517E5D87A0059A895 /* QuartzCore.framework */; };
 		F367582817E5D87A0059A895 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F367582717E5D87A0059A895 /* OpenGLES.framework */; };
 		F367582A17E5D87A0059A895 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F367582917E5D87A0059A895 /* OpenAL.framework */; };
@@ -152,6 +153,8 @@
 /* Begin PBXFileReference section */
 		F327EFC517E76014003C7825 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		F327EFC617E76014003C7825 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		F361072817EF051100331E22 /* ScenarioLimits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScenarioLimits.h; sourceTree = "<group>"; };
+		F361072917EF051100331E22 /* ScenarioLimits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScenarioLimits.m; sourceTree = "<group>"; };
 		F367582217E5D87A0059A895 /* New snake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "New snake.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F367582517E5D87A0059A895 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F367582717E5D87A0059A895 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -515,6 +518,8 @@
 				F3C777F117E7144700E402D2 /* SnakeGameLayer.m */,
 				F3C0F21617E7784E00A72D9D /* Snake.h */,
 				F3C0F21717E7784E00A72D9D /* Snake.m */,
+				F361072817EF051100331E22 /* ScenarioLimits.h */,
+				F361072917EF051100331E22 /* ScenarioLimits.m */,
 				F3F78A2517EE0D2B003B8D2B /* GameInfo.h */,
 				F3F78A2617EE0D2B003B8D2B /* GameInfo.m */,
 				F3C777ED17E7100E00E402D2 /* Info.h */,
@@ -1100,6 +1105,7 @@
 				F327EFC717E76014003C7825 /* Constants.m in Sources */,
 				F3C0F21817E7784E00A72D9D /* Snake.m in Sources */,
 				F3F78A2717EE0D2B003B8D2B /* GameInfo.m in Sources */,
+				F361072A17EF051200331E22 /* ScenarioLimits.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

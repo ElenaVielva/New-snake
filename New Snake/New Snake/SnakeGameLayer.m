@@ -46,14 +46,18 @@
 		level = [Info sharedInfo].level;
         
         // ask director for the window size
-		CGSize size = [[CCDirector sharedDirector] winSize];
+		size = [[CCDirector sharedDirector] winSize];
 
         
         		
         player = [Snake node];
         [self addChild:player];
         
-        info = [[[GameInfo alloc] initWithLevel:level] retain];
+        //@TODO: Change the boundary configuration, (un)set it from the menu
+        scene = [[ScenarioLimits alloc] initWithBoundary:YES];
+        [self addChild:scene];
+        
+        info = [[GameInfo alloc] initWithLevel:level];
         
         endLabel = [CCLabelTTF labelWithString:@"Game Over" fontName:@"American Typewriter" fontSize:30];
         endLabel.color = ccc3(141, 141, 235);
@@ -68,6 +72,13 @@
         labelCountDown.position = ccp(size.width*0.5, size.height*0.5);
         [self addChild:labelCountDown z:5];
         labelCountDown.visible = NO;
+        
+        scoreLabel = [CCLabelTTF labelWithString:@"0" fontName:@"American Typewriter" fontSize:18];
+//        scoreLabel.horizontalAlignment = kCCTextAlignmentRight;
+        scoreLabel.anchorPoint = ccp(1, 0);
+        scoreLabel.color = ccc3(232, 232, 235);
+        scoreLabel.position = ccp(size.width*0.95, size.height*0.93);
+        [self addChild:scoreLabel z:5];
         
         [[UIAccelerometer sharedAccelerometer] setUpdateInterval:1.0 / 60];
         [[UIAccelerometer sharedAccelerometer] setDelegate:self];
@@ -126,27 +137,59 @@
     
     float difX = currAccX-refAccX;
     float difY = currAccY-refAccY;
-    
+
     int direction;
-    if (difX<-0.2) {
-        direction = up;
-    } else if (difX>0.2) {
-        direction = down;
-    } else if (difY>0.1) {
-        direction = right;
-    } else if (difY<-0.1) {
-        direction = left;
-    } else {
-        direction = same;
+    
+    // To avoid preferences on up/down directions. Makes the motion a bit more intuitive
+    if (abs(difX)>abs(difY)*2) {
+        if (difX<-0.2) {
+            direction = up;
+        } else if (difX>0.2) {
+            direction = down;
+        } else if (difY>0.1) {
+            direction = right;
+        } else if (difY<-0.1) {
+            direction = left;
+        } else {
+            direction = same;
+        }
+    }else {
+        if (difY>0.1) {
+            direction = right;
+        } else if (difY<-0.1) {
+            direction = left;
+        } else if (difX<-0.2) {
+            direction = up;
+        } else if (difX>0.2) {
+            direction = down;
+        } else  {
+            direction = same;
+        }
     }
     
     // End of the game (collision)
-    if (![player move:direction]) {
+    if (![player move:direction] || [scene willCollide:player.head]) {
         [self unschedule:@selector(move)];
         endLabel.visible = YES;
     };
+    
+    CGPoint nextHead = player.head;
+    if (player.head.x<limLeft*size.width) {
+        nextHead = ccp(limRight*size.width-5, player.head.y);
+    } else if (player.head.x>limRight*size.width) {
+        nextHead = ccp(limLeft*size.width+5, player.head.y);
+    } else if (player.head.y<limDown*size.height) {
+        nextHead = ccp(player.head.x, limUp*size.height-5);
+    } else if (player.head.y>limUp*size.height) {
+        nextHead = ccp(player.head.x, limDown*size.height+5);
+    }
+    if (!CGPointEqualToPoint(nextHead, player.head)) {
+        player.head = nextHead;
+    }
+    
     if ([player eat:info.posFood]) {
         [info eatFood];
+        [scoreLabel setString:[NSString stringWithFormat:@"%d",info.gameScore]];
     }
 
 }
@@ -159,6 +202,9 @@
     NSLog(@"Deallocating %@",self);
     
     [info release];
+    [scene release];
+    
+    [[UIAccelerometer sharedAccelerometer] setDelegate:nil];
 	
 	// don't forget to call "super dealloc"
 	[super dealloc];

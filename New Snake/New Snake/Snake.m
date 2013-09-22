@@ -20,7 +20,9 @@
     self = [super init];
     if (self) {
         CGSize size = [[CCDirector sharedDirector] winSize];
-        head_ = ccp(size.width*0.5, size.height*0.5);
+        
+        //@TODO: Change the positions to a new grid system
+        head_ = ccp(size.width*0.05+55, size.height*0.05+55);
         dir_ = right;
         
         tail = [[NSMutableArray array] retain];
@@ -31,7 +33,6 @@
     }
     return self;
 }
-
 
 -(void) draw {
     
@@ -53,7 +54,6 @@
          direction == same ){
         direction = dir_;
     }
-    
     CGPoint nextHead = CGPointZero;
     
     switch (direction) {
@@ -73,6 +73,7 @@
             NSLog(@"???");
             break;
     }
+    
     
     ultPos = [[tail objectAtIndexedSubscript:[tail count]-1] CGPointValue];
     

@@ -20,7 +20,7 @@
 }
 
 @property (nonatomic) int level;
-@property (nonatomic) int gameScore;
+@property (nonatomic, readonly) int gameScore;
 @property (nonatomic) CGPoint posFood;
 
 -(id) initWithLevel:(int) level;

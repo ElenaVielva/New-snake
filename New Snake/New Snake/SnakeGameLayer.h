@@ -8,15 +8,20 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+
 #import "Snake.h"
+#import "ScenarioLimits.h"
 #import "GameInfo.h"
+
 
 @interface SnakeGameLayer : CCLayer <UIAccelerometerDelegate> {
     int level;
 
+    CGSize size;
     int countDown;
     CCLabelTTF *labelCountDown;
     CCLabelTTF *endLabel;
+    CCLabelTTF *scoreLabel;
     
     float refAccX;
     float refAccY;
@@ -25,6 +30,7 @@
     float currAccY;
     
     Snake *player;
+    ScenarioLimits *scene;
     GameInfo *info;
     
 }

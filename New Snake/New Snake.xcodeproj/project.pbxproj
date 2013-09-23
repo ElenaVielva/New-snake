@@ -144,6 +144,9 @@
 		F36759CF17E5D87C0059A895 /* MenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F36759CE17E5D87C0059A895 /* MenuLayer.m */; };
 		F36759D217E5D87C0059A895 /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F36759D117E5D87C0059A895 /* IntroLayer.m */; };
 		F3C0F21817E7784E00A72D9D /* Snake.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C0F21717E7784E00A72D9D /* Snake.m */; };
+		F3C269AE17F048B700A84A0A /* 8bitoperator.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3C269AD17F048B700A84A0A /* 8bitoperator.ttf */; };
+		F3C269B017F04BB100A84A0A /* Telespania.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3C269AF17F04BB100A84A0A /* Telespania.ttf */; };
+		F3C269B317F04CD000A84A0A /* ChangeLevelBoundaries.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C269B217F04CD000A84A0A /* ChangeLevelBoundaries.m */; };
 		F3C777EC17E7023A00E402D2 /* ChangeLevelLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C777EB17E7023A00E402D2 /* ChangeLevelLayer.m */; };
 		F3C777EF17E7100E00E402D2 /* Info.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C777EE17E7100E00E402D2 /* Info.m */; };
 		F3C777F217E7144700E402D2 /* SnakeGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C777F117E7144700E402D2 /* SnakeGameLayer.m */; };
@@ -438,6 +441,10 @@
 		F36759D117E5D87C0059A895 /* IntroLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroLayer.m; sourceTree = "<group>"; };
 		F3C0F21617E7784E00A72D9D /* Snake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Snake.h; sourceTree = "<group>"; };
 		F3C0F21717E7784E00A72D9D /* Snake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Snake.m; sourceTree = "<group>"; };
+		F3C269AD17F048B700A84A0A /* 8bitoperator.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = 8bitoperator.ttf; sourceTree = "<group>"; };
+		F3C269AF17F04BB100A84A0A /* Telespania.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Telespania.ttf; sourceTree = "<group>"; };
+		F3C269B117F04CD000A84A0A /* ChangeLevelBoundaries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeLevelBoundaries.h; sourceTree = "<group>"; };
+		F3C269B217F04CD000A84A0A /* ChangeLevelBoundaries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeLevelBoundaries.m; sourceTree = "<group>"; };
 		F3C777EA17E7023A00E402D2 /* ChangeLevelLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeLevelLayer.h; sourceTree = "<group>"; };
 		F3C777EB17E7023A00E402D2 /* ChangeLevelLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeLevelLayer.m; sourceTree = "<group>"; };
 		F3C777ED17E7100E00E402D2 /* Info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Info.h; sourceTree = "<group>"; };
@@ -514,6 +521,8 @@
 				F36759CE17E5D87C0059A895 /* MenuLayer.m */,
 				F3C777EA17E7023A00E402D2 /* ChangeLevelLayer.h */,
 				F3C777EB17E7023A00E402D2 /* ChangeLevelLayer.m */,
+				F3C269B117F04CD000A84A0A /* ChangeLevelBoundaries.h */,
+				F3C269B217F04CD000A84A0A /* ChangeLevelBoundaries.m */,
 				F3C777F017E7144700E402D2 /* SnakeGameLayer.h */,
 				F3C777F117E7144700E402D2 /* SnakeGameLayer.m */,
 				F3C0F21617E7784E00A72D9D /* Snake.h */,
@@ -536,6 +545,7 @@
 		F367583A17E5D87A0059A895 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F3C269AC17F048B700A84A0A /* Fonts */,
 				F367583B17E5D87A0059A895 /* Default.png */,
 				F367583D17E5D87A0059A895 /* Default@2x.png */,
 				F367583F17E5D87A0059A895 /* Default-568h@2x.png */,
@@ -914,6 +924,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F3C269AC17F048B700A84A0A /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				F3C269AF17F04BB100A84A0A /* Telespania.ttf */,
+				F3C269AD17F048B700A84A0A /* 8bitoperator.ttf */,
+			);
+			name = Fonts;
+			path = Resources/Fonts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -977,6 +997,8 @@
 				F367584E17E5D87A0059A895 /* Icon@2x.png in Resources */,
 				F367585117E5D87A0059A895 /* iTunesArtwork in Resources */,
 				F36759AA17E5D87C0059A895 /* ChangeLog in Resources */,
+				F3C269AE17F048B700A84A0A /* 8bitoperator.ttf in Resources */,
+				F3C269B017F04BB100A84A0A /* Telespania.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1106,6 +1128,7 @@
 				F3C0F21817E7784E00A72D9D /* Snake.m in Sources */,
 				F3F78A2717EE0D2B003B8D2B /* GameInfo.m in Sources */,
 				F361072A17EF051200331E22 /* ScenarioLimits.m in Sources */,
+				F3C269B317F04CD000A84A0A /* ChangeLevelBoundaries.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

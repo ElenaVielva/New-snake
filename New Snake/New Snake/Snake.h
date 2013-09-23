@@ -14,6 +14,8 @@
     CGPoint head_;
     NSMutableArray *tail;
     
+    BOOL death;
+    
     CGPoint ultPos;
 }
 
@@ -24,5 +26,6 @@
 -(BOOL) isOnSnake:(CGPoint)pos;
 
 -(BOOL) eat:(CGPoint) foodPos;
+-(void) die;
 
 @end

@@ -48,18 +48,21 @@
         // ask director for the window size
 		size = [[CCDirector sharedDirector] winSize];
 
+        limL = [Info sharedInfo].limL;
+        limR = [Info sharedInfo].limR;
+        limU = [Info sharedInfo].limU;
+        limD = [Info sharedInfo].limD;
         
-        		
         player = [Snake node];
         [self addChild:player];
         
         //@TODO: Change the boundary configuration, (un)set it from the menu
-        scene = [[ScenarioLimits alloc] initWithBoundary:YES];
+        scene = [[ScenarioLimits alloc] initWithBoundary:[Info sharedInfo].boundaries];
         [self addChild:scene];
         
         info = [[GameInfo alloc] initWithLevel:level];
         
-        endLabel = [CCLabelTTF labelWithString:@"Game Over" fontName:@"American Typewriter" fontSize:30];
+        endLabel = [CCLabelTTF labelWithString:@"Game Over" fontName:@"Telespania" fontSize:30];
         endLabel.color = ccc3(141, 141, 235);
         endLabel.position = ccp(size.width*0.5, size.height*0.5);
         [self addChild:endLabel z:5];
@@ -67,14 +70,13 @@
         
         
         countDown = 2;
-        labelCountDown = [CCLabelTTF labelWithString:@"3" fontName:@"American Typewriter" fontSize:60];
+        labelCountDown = [CCLabelTTF labelWithString:@"3" fontName:@"Telespania" fontSize:60];
         labelCountDown.color = ccc3(141, 141, 235);
         labelCountDown.position = ccp(size.width*0.5, size.height*0.5);
         [self addChild:labelCountDown z:5];
         labelCountDown.visible = NO;
         
-        scoreLabel = [CCLabelTTF labelWithString:@"0" fontName:@"American Typewriter" fontSize:18];
-//        scoreLabel.horizontalAlignment = kCCTextAlignmentRight;
+        scoreLabel = [CCLabelTTF labelWithString:@"0" fontName:@"Telespania" fontSize:18];
         scoreLabel.anchorPoint = ccp(1, 0);
         scoreLabel.color = ccc3(232, 232, 235);
         scoreLabel.position = ccp(size.width*0.95, size.height*0.93);
@@ -170,18 +172,20 @@
     // End of the game (collision)
     if (![player move:direction] || [scene willCollide:player.head]) {
         [self unschedule:@selector(move)];
+        [player die];
         endLabel.visible = YES;
     };
     
     CGPoint nextHead = player.head;
-    if (player.head.x<limLeft*size.width) {
-        nextHead = ccp(limRight*size.width-5, player.head.y);
-    } else if (player.head.x>limRight*size.width) {
-        nextHead = ccp(limLeft*size.width+5, player.head.y);
-    } else if (player.head.y<limDown*size.height) {
-        nextHead = ccp(player.head.x, limUp*size.height-5);
-    } else if (player.head.y>limUp*size.height) {
-        nextHead = ccp(player.head.x, limDown*size.height+5);
+    
+    if (player.head.x<limL) {
+        nextHead = ccp(limR-gridSize/2, player.head.y);
+    } else if (player.head.x>limR) {
+        nextHead = ccp(limL+gridSize/2, player.head.y);
+    } else if (player.head.y<limD) {
+        nextHead = ccp(player.head.x, limU-gridSize/2);
+    } else if (player.head.y>limU) {
+        nextHead = ccp(player.head.x, limD+gridSize/2);
     }
     if (!CGPointEqualToPoint(nextHead, player.head)) {
         player.head = nextHead;

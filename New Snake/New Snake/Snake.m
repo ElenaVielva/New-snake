@@ -22,20 +22,28 @@
         CGSize size = [[CCDirector sharedDirector] winSize];
         
         //@TODO: Change the positions to a new grid system
-        head_ = ccp(size.width*0.05+55, size.height*0.05+55);
+        head_ = ccp(marginH+5*gridSize+gridSize/2, marginH+10*gridSize+gridSize/2);
+//        head_ = ccp(size.width*0.05+55, size.height*0.05+55);
         dir_ = right;
         
         tail = [[NSMutableArray array] retain];
-        [tail addObject:[NSValue valueWithCGPoint:CGPointMake(head_.x-10, head_.y)]];
-        [tail addObject:[NSValue valueWithCGPoint:CGPointMake(head_.x-10, head_.y-10)]];
-        [tail addObject:[NSValue valueWithCGPoint:CGPointMake(head_.x-10, head_.y-20)]];
-        [tail addObject:[NSValue valueWithCGPoint:CGPointMake(head_.x-10, head_.y-30)]];
+        [tail addObject:[NSValue valueWithCGPoint:CGPointMake(head_.x-gridSize, head_.y)]];
+        [tail addObject:[NSValue valueWithCGPoint:CGPointMake(head_.x-gridSize, head_.y-gridSize)]];
+        [tail addObject:[NSValue valueWithCGPoint:CGPointMake(head_.x-gridSize, head_.y-2*gridSize)]];
+        [tail addObject:[NSValue valueWithCGPoint:CGPointMake(head_.x-gridSize, head_.y-3*gridSize)]];
     }
     return self;
 }
 
 -(void) draw {
     
+    if (death) {
+        for (int i=0;i<[tail count];i++) {
+            CGPoint tailpart = [[tail objectAtIndex:i] CGPointValue];
+            ccDrawSolidRect(ccp(tailpart.x-5, tailpart.y-5), ccp(tailpart.x+5, tailpart.y+5), ccc4f(1, 0.33, 0, 1));
+        }
+        return;
+    }
     ccDrawSolidRect(ccp(head_.x-5, head_.y-5), ccp(head_.x+5, head_.y+5), ccc4f(0.91, 0.91, 0.92, 1));
     for (int i=0;i<[tail count];i++) {
         CGPoint tailpart = [[tail objectAtIndex:i] CGPointValue];
@@ -58,16 +66,16 @@
     
     switch (direction) {
         case left:
-            nextHead = ccp(head_.x-10, head_.y);
+            nextHead = ccp(head_.x-gridSize, head_.y);
             break;
         case right:
-            nextHead = ccp(head_.x+10, head_.y);
+            nextHead = ccp(head_.x+gridSize, head_.y);
             break;
         case up:
-            nextHead = ccp(head_.x, head_.y+10);
+            nextHead = ccp(head_.x, head_.y+gridSize);
             break;
         case down:
-            nextHead = ccp(head_.x, head_.y-10);
+            nextHead = ccp(head_.x, head_.y-gridSize);
             break;
         default:
             NSLog(@"???");
@@ -113,6 +121,10 @@
         }
     }
     return NO;
+}
+
+-(void) die {
+    death = YES;
 }
 
 // on "dealloc" you need to release all your retained objects

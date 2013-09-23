@@ -1,17 +1,16 @@
 //
-//  ChangeLevelLayer.m
+//  ChangeLevelBoundaries.m
 //  New snake
 //
-//  Created by Elena Vielva on 16/09/13.
+//  Created by Elena Vielva on 23/09/13.
 //  Copyright 2013 Elena Vielva. All rights reserved.
 //
 
-#import "ChangeLevelLayer.h"
+#import "ChangeLevelBoundaries.h"
+#import "MenuLayer.h"
 #import "Info.h"
 
-#import "MenuLayer.h"
-
-@implementation ChangeLevelLayer
+@implementation ChangeLevelBoundaries
 
 // Helper class method that creates a Scene with the HelloWorldLayer as the only child.
 +(CCScene *) scene {
@@ -19,7 +18,7 @@
 	CCScene *scene = [CCScene node];
 	
 	// 'layer' is an autorelease object.
-	ChangeLevelLayer *layer = [ChangeLevelLayer node];
+	ChangeLevelBoundaries *layer = [ChangeLevelBoundaries node];
 	
 	// add layer as a child to scene
 	[scene addChild: layer];
@@ -35,7 +34,7 @@
 	if( (self=[super init]) ) {
 		
 		// create and initialize a Label
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Level" fontName:@"Telespania" fontSize:50];
+		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Scenario" fontName:@"Telespania" fontSize:50];
         
 		// ask director for the window size
 		CGSize size = [[CCDirector sharedDirector] winSize];
@@ -54,30 +53,22 @@
 		
         CCMenuItem *back = [CCMenuItemFont itemWithString:@"Back" target:self selector:@selector(backMenu)];
 		
-        levels[easy] = [CCMenuItemFont itemWithString:@"Easy" target:self selector:@selector(selectEasy)];
-        levels[medium] = [CCMenuItemFont itemWithString:@"Medium" target:self selector:@selector(selectMedium)];
-        levels[hard] = [CCMenuItemFont itemWithString:@"Hard" target:self selector:@selector(selectHard)];
+        borders = [CCMenuItemFont itemWithString:@"Borders" target:self selector:@selector(selectBorders)];
+        noBorders = [CCMenuItemFont itemWithString:@"No Borders" target:self selector:@selector(selectNoBorders)];
         
-		CCMenu *menu = [CCMenu menuWithItems:levels[easy], levels[medium], levels[hard], back, nil];
+		CCMenu *menu = [CCMenu menuWithItems:borders, noBorders, back, nil];
 		
-        [menu alignItemsInColumns:[NSNumber numberWithInt:3],[NSNumber numberWithInt:1], nil];
+        [menu alignItemsInRows:[NSNumber numberWithInt:3], nil];
+		[menu setPosition:ccp(size.width/2, size.height*0.3)];
         
-//		[menu alignItemsHorizontallyWithPadding:30];
-		[menu setPosition:ccp( size.width/2, size.height*0.3)];
+        boundaries = [Info sharedInfo].boundaries;
 		
-        switch ([Info sharedInfo].level) {
-            case easy:
-                [self selectEasy];
-                break;
-            case medium:
-                [self selectMedium];
-                break;
-            case hard:
-                [self selectHard];
-                break;
-            default:
-                break;
+        if (boundaries) {
+            [self selectBorders];
+        }else {
+            [self selectNoBorders];
         }
+
         
 		// Add the menu to the layer
 		[self addChild:menu];
@@ -86,26 +77,21 @@
 	return self;
 }
 
--(void) selectEasy {
-    [levels[currentSelected] setColor:ccWHITE];
-    [levels[easy] setColor:ccc3(130, 224, 121)];
-    currentSelected = easy;
+-(void) selectBorders {
+    boundaries = YES;
+    [noBorders setString:@"No Borders"];
+    [borders setString:@"* Borders *"];
 }
 
--(void) selectMedium {
-    [levels[currentSelected] setColor:ccWHITE];
-    [levels[medium] setColor:ccc3(219, 224, 121)];
-    currentSelected = medium;
+-(void) selectNoBorders {
+    boundaries = NO;
+    [noBorders setString:@"* No Borders *"];
+    [borders setString:@"Borders"];
 }
 
--(void) selectHard {
-    [levels[currentSelected] setColor:ccWHITE];
-    [levels[hard] setColor:ccc3(224, 152, 121)];
-    currentSelected=hard;
-}
 
 - (void) backMenu {
-    [Info sharedInfo].level = currentSelected;
+    [Info sharedInfo].boundaries = boundaries;
     [[CCDirector sharedDirector] replaceScene:[MenuLayer scene]];
 }
 

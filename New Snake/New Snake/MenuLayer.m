@@ -11,6 +11,7 @@
 #import "MenuLayer.h"
 
 #import "ChangeLevelLayer.h"
+#import "ChangeLevelBoundaries.h"
 #import "SnakeGameLayer.h"
 
 #import "Info.h"
@@ -40,7 +41,7 @@
 	if( (self=[super init]) ) {
 		
 		// create and initialize a Label
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"New Snake" fontName:@"American Typewriter" fontSize:64];
+		CCLabelTTF *label = [CCLabelTTF labelWithString:@"New Snake" fontName:@"Telespania" fontSize:60];
 
 		// ask director for the window size
 		CGSize size = [[CCDirector sharedDirector] winSize];
@@ -54,7 +55,7 @@
 		
 		// Default font size will be 28 points.
 		[CCMenuItemFont setFontSize:28];
-        [CCMenuItemFont setFontName:@"American Typewriter"];
+        [CCMenuItemFont setFontName:@"Telespania"];
 		
 		// to avoid a retain-cycle with the menuitem and blocks
 		__block id copy_self = self;
@@ -79,8 +80,15 @@
 		}];
 		
         // Configure Menu Item using blocks
-		CCMenuItem *confMenuItem = [CCMenuItemFont itemWithString:@"Conf. position" block:^(id sender) {
-			NSLog(@"Configure position");
+        NSString *bound;
+        if ([Info sharedInfo].boundaries) {
+            bound = @"Borders";
+        }else {
+            bound = @"No borders";
+        }
+		CCMenuItem *confMenuItem = [CCMenuItemFont itemWithString:bound block:^(id sender) {
+			NSLog(@"Change boundaries");
+            [[CCDirector sharedDirector] replaceScene:[ChangeLevelBoundaries scene]];
 		}];
         
 		// Play game Menu Item using blocks
@@ -92,7 +100,6 @@
 		CCMenu *menu = [CCMenu menuWithItems:levelMenuItem, confMenuItem,playMenuItem, nil];
 		
         [menu alignItemsInColumns:[NSNumber numberWithInt:2],[NSNumber numberWithInt:1], nil];
-//		[menu alignItemsHorizontallyWithPadding:30];
 		[menu setPosition:ccp( size.width/2, size.height*0.3)];
 		
 		// Add the menu to the layer

@@ -9,6 +9,7 @@
 #import "ScenarioLimits.h"
 #import "CCGL.h"
 #import "Constants.h"
+#import "Info.h"
 
 @implementation ScenarioLimits
 
@@ -18,20 +19,28 @@
         bound = boundary;
         size = [CCDirector sharedDirector].winSize;
         
-        ldcorner = ccp(size.width*limLeft, size.height*limDown);
-        lucorner = ccp(size.width*limLeft, size.height*limUp);
-        rdcorner = ccp(size.width*limRight, size.height*limDown);
-        rucorner = ccp(size.width*limRight, size.height*limUp);
+        float limL, limR, limD, limU;
+        limL = [Info sharedInfo].limL;
+        limR = [Info sharedInfo].limR;
+        limU = [Info sharedInfo].limU;
+        limD = [Info sharedInfo].limD;
+        
+        ldcorner = ccp(limL, limD);
+        lucorner = ccp(limL, limU);
+        rdcorner = ccp(limR, limD);
+        rucorner = ccp(limR, limU);
+        
+
     }
     return self;
 }
 
 -(BOOL) willCollide:(CGPoint)headPos {
     if (bound) {
-        if ((headPos.x > (size.width*limRight)) ||
-            (headPos.x < (size.width*limLeft)) ||
-            (headPos.y > (size.height*limUp))||
-            (headPos.y < (size.height*limDown)) ) {
+        if ((headPos.x > rdcorner.x) ||
+            (headPos.x < ldcorner.x) ||
+            (headPos.y > lucorner.y)||
+            (headPos.y < ldcorner.y) ) {
             return YES;
         }
     }
@@ -57,6 +66,7 @@
     }
 }
 
+// From: https://code.google.com/p/cocos2d-iphone/issues/detail?id=400
 static void drawDashedLine(CGPoint origin, CGPoint destination, float dashLength) {
 	float dx = destination.x - origin.x;
     float dy = destination.y - origin.y;

@@ -33,6 +33,8 @@
     ScenarioLimits *scene;
     GameInfo *info;
     
+    float limL, limR, limD, limU;
+    
 }
 
 // returns a CCScene that contains the HelloWorldLayer as the only child

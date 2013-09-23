@@ -7,7 +7,8 @@
 //
 
 #import "GameInfo.h"
-
+#import "Info.h"
+#import "Constants.h"
 
 @implementation GameInfo
 
@@ -17,8 +18,13 @@
         _level = level;
         _gameScore = 0;
         
+        limL = [Info sharedInfo].limL;
+        limR = [Info sharedInfo].limR;
+        limU = [Info sharedInfo].limU;
+        limD = [Info sharedInfo].limD;
+        
         CGSize size = [CCDirector sharedDirector].winSize;
-        _posFood = ccp(size.width*0.5+20, size.height*0.5);
+        _posFood = ccp(limL+12*gridSize+gridSize/2, limD+8*gridSize+gridSize/2);
     }
     return self;
 }
@@ -29,7 +35,7 @@
     
     CGPoint tempPos;
     do {
-        tempPos = ccpAdd(_posFood,ccp(20,0));
+        tempPos = ccpAdd(_posFood,ccp(gridSize*3,0));
     } while ([snake isOnSnake:tempPos]);
     
     _posFood = tempPos;

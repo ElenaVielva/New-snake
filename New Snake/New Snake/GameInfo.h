@@ -16,6 +16,8 @@
     int _gameScore;
     CGPoint _posFood;
     
+    float limL, limR, limD, limU;
+    
     Snake *snake;
 }
 

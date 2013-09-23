@@ -14,6 +14,11 @@
 #define limUp       0.92
 #define limDown     0.05
 
+// The margin must be a multiple of the gridSize
+#define gridSize    10
+#define marginH     20
+#define marginV     30
+
 @interface Constants : NSObject
 
 typedef enum {

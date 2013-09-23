@@ -103,7 +103,6 @@
 
 -(BOOL) eat:(CGPoint) foodPos {
     if (CGPointEqualToPoint(head_, foodPos)) {
-        NSLog(@"Come");
         [tail addObject:[NSValue valueWithCGPoint:ultPos]];
         return YES;
     }
@@ -111,11 +110,14 @@
 }
 
 -(BOOL) isOnSnake:(CGPoint)pos {
+//    NSLog(@"Punto a comprobar %f %f",pos.x, pos.y);
+//    NSLog(@"Cabeza %f %f", head_.x, head_.y);
     if (CGPointEqualToPoint(head_, pos)) {
         return YES;
     }
     for (int i=0; i<[tail count]; i++) {
         CGPoint tailPos = [[tail objectAtIndexedSubscript:i] CGPointValue];
+//        NSLog(@"Cola %d %f %f", i, tailPos.x, tailPos.y);
         if (CGPointEqualToPoint(tailPos, pos)) {
             return YES;
         }

@@ -12,33 +12,40 @@
 
 @implementation GameInfo
 
--(id) initWithLevel:(int) level {
+@synthesize posFood = posFood_;
+@synthesize gameScore = gameScore_;
+@synthesize level = level_;
+
+-(id) initWithLevel:(int) level Player:(Snake *)player {
     self = [super init];
     if (self) {
-        _level = level;
-        _gameScore = 0;
+        level_ = level;
+        gameScore_ = 0;
         
         limL = [Info sharedInfo].limL;
         limR = [Info sharedInfo].limR;
         limU = [Info sharedInfo].limU;
         limD = [Info sharedInfo].limD;
         
-        CGSize size = [CCDirector sharedDirector].winSize;
-        _posFood = ccp(limL+12*gridSize+gridSize/2, limD+8*gridSize+gridSize/2);
+        posFood_ = ccp(limL+12*gridSize+gridSize/2, limD+8*gridSize+gridSize/2);
+        
+        snake = player;
     }
     return self;
 }
 
 -(void) eatFood {
-    _gameScore+=_level+1;
-    NSLog(@"Score: %d",_gameScore);
+    gameScore_+=level_+1;
     
     CGPoint tempPos;
     do {
-        tempPos = ccpAdd(_posFood,ccp(gridSize*3,0));
+        int col = arc4random() % [Info sharedInfo].numCols;
+        int row = arc4random() % [Info sharedInfo].numRows;
+        tempPos = ccp(marginH + col*gridSize+gridSize/2, marginH + row*gridSize+gridSize/2);
+
     } while ([snake isOnSnake:tempPos]);
     
-    _posFood = tempPos;
+    posFood_ = tempPos;
 }
 
 // on "dealloc" you need to release all your retained objects

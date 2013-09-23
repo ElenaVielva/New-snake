@@ -106,6 +106,7 @@
 
 - (void) backMenu {
     [Info sharedInfo].level = currentSelected;
+    [[Info sharedInfo] saveState];
     [[CCDirector sharedDirector] replaceScene:[MenuLayer scene]];
 }
 

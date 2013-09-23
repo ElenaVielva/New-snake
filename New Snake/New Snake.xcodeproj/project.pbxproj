@@ -476,6 +476,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F3527FE817F055B500996964 /* Menus */ = {
+			isa = PBXGroup;
+			children = (
+				F36759CD17E5D87C0059A895 /* MenuLayer.h */,
+				F36759CE17E5D87C0059A895 /* MenuLayer.m */,
+				F3C777EA17E7023A00E402D2 /* ChangeLevelLayer.h */,
+				F3C777EB17E7023A00E402D2 /* ChangeLevelLayer.m */,
+				F3C269B117F04CD000A84A0A /* ChangeLevelBoundaries.h */,
+				F3C269B217F04CD000A84A0A /* ChangeLevelBoundaries.m */,
+			);
+			name = Menus;
+			sourceTree = "<group>";
+		};
+		F3527FE917F055DF00996964 /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				F327EFC517E76014003C7825 /* Constants.h */,
+				F327EFC617E76014003C7825 /* Constants.m */,
+				F3F78A2517EE0D2B003B8D2B /* GameInfo.h */,
+				F3F78A2617EE0D2B003B8D2B /* GameInfo.m */,
+				F3C777ED17E7100E00E402D2 /* Info.h */,
+				F3C777EE17E7100E00E402D2 /* Info.m */,
+			);
+			name = Info;
+			sourceTree = "<group>";
+		};
 		F367581917E5D87A0059A895 = {
 			isa = PBXGroup;
 			children = (
@@ -514,27 +540,17 @@
 			isa = PBXGroup;
 			children = (
 				F36759CA17E5D87C0059A895 /* AppDelegate.h */,
-				F327EFC517E76014003C7825 /* Constants.h */,
-				F327EFC617E76014003C7825 /* Constants.m */,
 				F36759CB17E5D87C0059A895 /* AppDelegate.m */,
-				F36759CD17E5D87C0059A895 /* MenuLayer.h */,
-				F36759CE17E5D87C0059A895 /* MenuLayer.m */,
-				F3C777EA17E7023A00E402D2 /* ChangeLevelLayer.h */,
-				F3C777EB17E7023A00E402D2 /* ChangeLevelLayer.m */,
-				F3C269B117F04CD000A84A0A /* ChangeLevelBoundaries.h */,
-				F3C269B217F04CD000A84A0A /* ChangeLevelBoundaries.m */,
+				F36759D017E5D87C0059A895 /* IntroLayer.h */,
+				F36759D117E5D87C0059A895 /* IntroLayer.m */,
+				F3527FE917F055DF00996964 /* Info */,
+				F3527FE817F055B500996964 /* Menus */,
 				F3C777F017E7144700E402D2 /* SnakeGameLayer.h */,
 				F3C777F117E7144700E402D2 /* SnakeGameLayer.m */,
 				F3C0F21617E7784E00A72D9D /* Snake.h */,
 				F3C0F21717E7784E00A72D9D /* Snake.m */,
 				F361072817EF051100331E22 /* ScenarioLimits.h */,
 				F361072917EF051100331E22 /* ScenarioLimits.m */,
-				F3F78A2517EE0D2B003B8D2B /* GameInfo.h */,
-				F3F78A2617EE0D2B003B8D2B /* GameInfo.m */,
-				F3C777ED17E7100E00E402D2 /* Info.h */,
-				F3C777EE17E7100E00E402D2 /* Info.m */,
-				F36759D017E5D87C0059A895 /* IntroLayer.h */,
-				F36759D117E5D87C0059A895 /* IntroLayer.m */,
 				F367583A17E5D87A0059A895 /* Resources */,
 				F367585217E5D87A0059A895 /* libs */,
 				F36759C617E5D87C0059A895 /* Supporting Files */,

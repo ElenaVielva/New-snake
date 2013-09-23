@@ -40,19 +40,20 @@
 	// Apple recommends to re-assign "self" with the "super's" return value
 	if( (self=[super init]) ) {
 		
+        // ask director for the window size
+		CGSize size = [[CCDirector sharedDirector] winSize];
+        
 		// create and initialize a Label
 		CCLabelTTF *label = [CCLabelTTF labelWithString:@"New Snake" fontName:@"Telespania" fontSize:60];
-
-		// ask director for the window size
-		CGSize size = [[CCDirector sharedDirector] winSize];
-	
-		// position the label on the center of the screen
 		label.position =  ccp( size.width /2 , size.height*0.6 );
-		
-		// add the label as a child to this Layer
 		[self addChild: label];
 		
-		
+		NSString *max = [NSString stringWithFormat:@"Max score: %d",[Info sharedInfo].score];
+        CCLabelTTF *bestScore = [CCLabelTTF labelWithString:max fontName:@"Telespania" fontSize:20];
+        bestScore.position = ccp(size.width*0.9, size.height*0.9);
+        bestScore.anchorPoint = ccp(1, 0);
+        [self addChild:bestScore];
+        
 		// Default font size will be 28 points.
 		[CCMenuItemFont setFontSize:28];
         [CCMenuItemFont setFontName:@"Telespania"];

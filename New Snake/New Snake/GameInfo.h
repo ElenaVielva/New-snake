@@ -12,9 +12,9 @@
 
 @interface GameInfo : NSObject {
     
-    int _level;
-    int _gameScore;
-    CGPoint _posFood;
+    int level_;
+    int gameScore_;
+    CGPoint posFood_;
     
     float limL, limR, limD, limU;
     
@@ -25,7 +25,7 @@
 @property (nonatomic, readonly) int gameScore;
 @property (nonatomic) CGPoint posFood;
 
--(id) initWithLevel:(int) level;
+-(id) initWithLevel:(int) level Player:(Snake*) player;
 -(void) eatFood;
 
 @end

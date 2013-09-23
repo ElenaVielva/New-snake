@@ -92,6 +92,7 @@
 
 - (void) backMenu {
     [Info sharedInfo].boundaries = boundaries;
+    [[Info sharedInfo] saveState];
     [[CCDirector sharedDirector] replaceScene:[MenuLayer scene]];
 }
 

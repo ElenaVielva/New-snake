@@ -9,15 +9,18 @@
 #import <Foundation/Foundation.h>
 
 @interface Info : NSObject {
-    int _level;
-    int _score;
+    int level_;
+    int score_;
     
-    BOOL _boundaries;
+    BOOL boundaries_;
     
-    float _limL;
-    float _limR;
-    float _limD;
-    float _limU;
+    float limL_;
+    float limR_;
+    float limD_;
+    float limU_;
+    
+    int numCols_;
+    int numRows_;
     
 }
 
@@ -29,7 +32,11 @@
 @property (nonatomic) float limD;
 @property (nonatomic) float limU;
 @property (nonatomic) BOOL boundaries;
+@property (nonatomic) int numCols;
+@property (nonatomic) int numRows;
 
 +(Info*) sharedInfo;
+-(void) updateScore:(int)score;
+-(void) saveState;
 
 @end

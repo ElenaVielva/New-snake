@@ -56,11 +56,10 @@
         player = [Snake node];
         [self addChild:player];
         
-        //@TODO: Change the boundary configuration, (un)set it from the menu
         scene = [[ScenarioLimits alloc] initWithBoundary:[Info sharedInfo].boundaries];
         [self addChild:scene];
         
-        info = [[GameInfo alloc] initWithLevel:level];
+        info = [[GameInfo alloc] initWithLevel:level Player:player];
         
         endLabel = [CCLabelTTF labelWithString:@"Game Over" fontName:@"Telespania" fontSize:30];
         endLabel.color = ccc3(141, 141, 235);
@@ -98,7 +97,6 @@
 
 - (void) countDownMethod {
     
-    NSLog(@"CountDownMethod, counter is %d",countDown);
     if (countDown>0) {
         [labelCountDown setString:[NSString stringWithFormat:@"%d",countDown]];
         countDown--;
@@ -155,7 +153,7 @@
         } else {
             direction = same;
         }
-    }else {
+    } else {
         if (difY>0.1) {
             direction = right;
         } else if (difY<-0.1) {
@@ -174,6 +172,7 @@
         [self unschedule:@selector(move)];
         [player die];
         endLabel.visible = YES;
+        [[Info sharedInfo] updateScore:info.gameScore];
     };
     
     CGPoint nextHead = player.head;

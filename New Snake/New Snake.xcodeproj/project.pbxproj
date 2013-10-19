@@ -143,6 +143,7 @@
 		F36759CC17E5D87C0059A895 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F36759CB17E5D87C0059A895 /* AppDelegate.m */; };
 		F36759CF17E5D87C0059A895 /* MenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F36759CE17E5D87C0059A895 /* MenuLayer.m */; };
 		F36759D217E5D87C0059A895 /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F36759D117E5D87C0059A895 /* IntroLayer.m */; };
+		F399D3F517F0D8B0002B034A /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F399D3F417F0D8B0002B034A /* Icon-72@2x.png */; };
 		F3C0F21817E7784E00A72D9D /* Snake.m in Sources */ = {isa = PBXBuildFile; fileRef = F3C0F21717E7784E00A72D9D /* Snake.m */; };
 		F3C269AE17F048B700A84A0A /* 8bitoperator.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3C269AD17F048B700A84A0A /* 8bitoperator.ttf */; };
 		F3C269B017F04BB100A84A0A /* Telespania.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3C269AF17F04BB100A84A0A /* Telespania.ttf */; };
@@ -439,6 +440,7 @@
 		F36759CE17E5D87C0059A895 /* MenuLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MenuLayer.m; sourceTree = "<group>"; };
 		F36759D017E5D87C0059A895 /* IntroLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntroLayer.h; sourceTree = "<group>"; };
 		F36759D117E5D87C0059A895 /* IntroLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroLayer.m; sourceTree = "<group>"; };
+		F399D3F417F0D8B0002B034A /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72@2x.png"; path = "Resources/Icon-72@2x.png"; sourceTree = "<group>"; };
 		F3C0F21617E7784E00A72D9D /* Snake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Snake.h; sourceTree = "<group>"; };
 		F3C0F21717E7784E00A72D9D /* Snake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Snake.m; sourceTree = "<group>"; };
 		F3C269AD17F048B700A84A0A /* 8bitoperator.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = 8bitoperator.ttf; sourceTree = "<group>"; };
@@ -567,6 +569,7 @@
 				F367583F17E5D87A0059A895 /* Default-568h@2x.png */,
 				F367584117E5D87A0059A895 /* Default-Landscape~ipad.png */,
 				F367584317E5D87A0059A895 /* Icon-72.png */,
+				F399D3F417F0D8B0002B034A /* Icon-72@2x.png */,
 				F367584517E5D87A0059A895 /* Icon-Small-50.png */,
 				F367584717E5D87A0059A895 /* Icon-Small.png */,
 				F367584917E5D87A0059A895 /* Icon-Small@2x.png */,
@@ -1015,6 +1018,7 @@
 				F36759AA17E5D87C0059A895 /* ChangeLog in Resources */,
 				F3C269AE17F048B700A84A0A /* 8bitoperator.ttf in Resources */,
 				F3C269B017F04BB100A84A0A /* Telespania.ttf in Resources */,
+				F399D3F517F0D8B0002B034A /* Icon-72@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -84,7 +84,7 @@
         [[UIAccelerometer sharedAccelerometer] setUpdateInterval:1.0 / 60];
         [[UIAccelerometer sharedAccelerometer] setDelegate:self];
         
-        [self setTouchEnabled:YES];
+        
         
 	}
 	return self;
@@ -106,13 +106,13 @@
     
     switch (level) {
         case easy:
-            [self schedule:@selector(move) interval:.8f];
+            [self schedule:@selector(move) interval:.6f];
             break;
         case medium:
-            [self schedule:@selector(move) interval:.4f];
+            [self schedule:@selector(move) interval:.3f];
             break;
         case hard:
-            [self schedule:@selector(move) interval:.2f];
+            [self schedule:@selector(move) interval:.1f];
             break;
         default:
             break;
@@ -141,26 +141,26 @@
     int direction;
     
     // To avoid preferences on up/down directions. Makes the motion a bit more intuitive
-    if (abs(difX)>abs(difY)*2) {
-        if (difX<-0.2) {
+    if (abs(difX)>abs(difY)*1.3) {
+        if ((difX<-0.2)&&(player.dir!=up)) {
             direction = up;
-        } else if (difX>0.2) {
+        } else if ((difX>0.2)&&(player.dir!=down)) {
             direction = down;
-        } else if (difY>0.1) {
+        } else if ((difY>0.15)&&(player.dir!=right)) {
             direction = right;
-        } else if (difY<-0.1) {
+        } else if ((difY<-0.15)&&(player.dir!=left)) {
             direction = left;
         } else {
             direction = same;
         }
     } else {
-        if (difY>0.1) {
+        if ((difY>0.15)&&(player.dir!=right)) {
             direction = right;
-        } else if (difY<-0.1) {
+        } else if ((difY<-0.15)&&(player.dir!=left)) {
             direction = left;
-        } else if (difX<-0.2) {
+        } else if ((difX<-0.2)&&(player.dir!=up)) {
             direction = up;
-        } else if (difX>0.2) {
+        } else if ((difX>0.2)&&(player.dir!=down)) {
             direction = down;
         } else  {
             direction = same;
@@ -173,6 +173,7 @@
         [player die];
         endLabel.visible = YES;
         [[Info sharedInfo] updateScore:info.gameScore];
+        [self setTouchEnabled:YES];
     };
     
     CGPoint nextHead = player.head;
